@@ -11,7 +11,7 @@ spec:
       description: the sub-directories under workspace
       default: ['.']
   workspaces:
-    - name: directory
+    - name: output
   results:
     - name: README
       description: echo the README of the repo
@@ -23,7 +23,7 @@ spec:
       args:
         - -ltr
         - '$(params.sub-dirs)'
-      workingDir: '$(workspaces.directory.path)'
+      workingDir: '$(workspaces.output.path)'
     - name: show-readme
       image: busybox
       script: |
