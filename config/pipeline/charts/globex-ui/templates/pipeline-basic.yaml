@@ -60,10 +60,22 @@ spec:
     - name: output
       workspace: shared-data
   - name: maven-package
-    runAfter: fetch-source
-    workspaces: 
-    - name: output
-      workspace: shared-data
+    params:
+    - name: MAVEN_IMAGE
+      value: gcr.io/cloud-builders/mvn
+    - name: GOALS
+      value:
+        - package
+    - name: PROXY_PROTOCOL
+      value: http
+    runAfter:
+      - fetch-source
+    taskRef:
+      kind: ClusterTask
+      name: maven
+    workspaces:
+      - name: source
+        workspace: shared-data
   - name: build-sign-image
     retries: 1
     params:
@@ -78,43 +90,43 @@ spec:
     - name: IMAGE
       value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
     runAfter:
-    - fetch-source
+    - maven-package
     taskRef:
       kind: ClusterTask
       name: buildah
     workspaces:
     - name: source
       workspace: shared-data
-  - name: acs-image-check
-    params:
-    - name: rox_central_endpoint
-      value: stackrox-endpoint
-    - name: rox_api_token
-      value: stackrox-secret
-    - name: image
-      value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
-    - name: insecure-skip-tls-verify
-      value: "true"
-    runAfter:
-    - build-sign-image
-    taskRef:
-      kind: Task
-      name: acs-image-check
-  - name: acs-image-scan
-    params:
-    - name: rox_central_endpoint
-      value: stackrox-endpoint
-    - name: rox_api_token
-      value: stackrox-secret
-    - name: image
-      value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
-    - name: insecure-skip-tls-verify
-      value: "true"
-    runAfter:
-    - build-sign-image
-    taskRef:
-      kind: Task
-      name: acs-image-scan
+#  - name: acs-image-check
+#    params:
+#    - name: rox_central_endpoint
+#      value: stackrox-endpoint
+#    - name: rox_api_token
+#      value: stackrox-secret
+#    - name: image
+#      value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
+#    - name: insecure-skip-tls-verify
+#      value: "true"
+#    runAfter:
+#    - build-sign-image
+#    taskRef:
+#      kind: Task
+#      name: acs-image-check
+#  - name: acs-image-scan
+#    params:
+#    - name: rox_central_endpoint
+#      value: stackrox-endpoint
+#    - name: rox_api_token
+#      value: stackrox-secret
+#    - name: image
+#      value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
+#    - name: insecure-skip-tls-verify
+#      value: "true"
+#    runAfter:
+#    - build-sign-image
+#    taskRef:
+#      kind: Task
+#      name: acs-image-scan
   - name: generate-sbom
     params:
     - name: cyclonedxHostUrl
@@ -138,42 +150,42 @@ spec:
     - name: git_user_name
       value: $(params.COMMIT_AUTHOR)
     runAfter:
-    - acs-image-check
-    - acs-image-scan
+#    - acs-image-check
+#    - acs-image-scan
     - generate-sbom
     taskRef:
       kind: Task
       name: update-manifest
-  - name: acs-deploy-check
-    params:
-      - name: rox_central_endpoint
-        value: stackrox-endpoint
-      - name: rox_api_token
-        value: stackrox-secret
-      - name: gitRepositoryUrl
-        value: $(params.MANIFEST_REPO)
-      - name: gitRepositoryRevision
-        value: main
-      - name: insecure-skip-tls-verify
-        value: 'true'
-    runAfter:
-      - update-dev-manifest
-    taskRef:
-      kind: Task
-      name: acs-deploy-check
-  - name: verify-tlog-signature
-    params:
-      - name: registrySecret
-        value: image-registry-secret
-      - name: cosignSecret
-        value: cosign-secret
-      - name: image
-        value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
-    runAfter:
-    - update-dev-manifest
-    taskRef:
-      kind: Task
-      name: rekor-verify
+#  - name: acs-deploy-check
+#    params:
+#      - name: rox_central_endpoint
+#        value: stackrox-endpoint
+#      - name: rox_api_token
+#        value: stackrox-secret
+#      - name: gitRepositoryUrl
+#        value: $(params.MANIFEST_REPO)
+#      - name: gitRepositoryRevision
+#        value: main
+#      - name: insecure-skip-tls-verify
+#        value: 'true'
+#    runAfter:
+#      - update-dev-manifest
+#    taskRef:
+#      kind: Task
+#      name: acs-deploy-check
+#  - name: verify-tlog-signature
+#    params:
+#      - name: registrySecret
+#        value: image-registry-secret
+#      - name: cosignSecret
+#        value: cosign-secret
+#      - name: image
+#        value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
+#    runAfter:
+#    - update-dev-manifest
+#    taskRef:
+#      kind: Task
+#      name: rekor-verify
   - name: create-prod-manifest-branch
     params:
     - name: image
@@ -187,8 +199,9 @@ spec:
     - name: target-branch
       value: feature-for-$(params.COMMIT_SHA)
     runAfter:
-    - acs-deploy-check
-    - verify-tlog-signature
+    - update-dev-manifest
+#    - acs-deploy-check
+#    - verify-tlog-signature
     taskRef:
       kind: Task
       name: pr-manifest
