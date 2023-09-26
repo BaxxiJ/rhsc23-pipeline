@@ -68,6 +68,8 @@ spec:
     workspaces:
       - name: source
         workspace: shared-data
+      - name: maven-settings
+        workspace: shared-data
   - name: build-sign-image
     retries: 1
     params:
