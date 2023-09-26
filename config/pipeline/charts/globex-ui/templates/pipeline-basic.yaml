@@ -51,6 +51,12 @@ spec:
     workspaces:
     - name: source
       workspace: shared-data
+  - name: list-directory
+    runAfter:
+     - fetch-source
+    workspaces:
+    - name: directory
+      workspace: shared-data
   - name: maven-package
     params:
     - name: MAVEN_IMAGE
@@ -61,7 +67,7 @@ spec:
     - name: PROXY_PROTOCOL
       value: http
     runAfter:
-      - fetch-source
+      - list-directory
     taskRef:
       kind: ClusterTask
       name: maven
