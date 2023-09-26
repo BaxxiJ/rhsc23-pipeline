@@ -61,7 +61,7 @@ spec:
     runAfter:
     - fetch-source
     workspaces:
-    - name: directory
+    - name: output
       workspace: shared-data
   - name: maven-package
     params:
