@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: app-globex-ui-pipeline
+  name: scoring-pipeline-basic
 spec:
   params:
   - name: REPO_HOST
