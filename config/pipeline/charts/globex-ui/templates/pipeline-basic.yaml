@@ -36,14 +36,6 @@ spec:
     type: string
   - name: GIT_REPO
     type: string
-  - name: SONARQUBE_HOST_URL
-    type: string
-  - name: SONARQUBE_PROJECT_KEY
-    type: string
-  - name: SONARQUBE_PROJECT_SECRET
-    type: string
-  - name: CYCLONEDX_HOST_URL
-    type: string
   tasks:
   - name: fetch-source
     params:
@@ -127,18 +119,6 @@ spec:
 #    taskRef:
 #      kind: Task
 #      name: acs-image-scan
-  - name: generate-sbom
-    params:
-    - name: cyclonedxHostUrl
-      value: $(params.CYCLONEDX_HOST_URL)
-    runAfter:
-    - build-sign-image
-    taskRef:
-      kind: Task
-      name: generate-sbom
-    workspaces:
-    - name: repository
-      workspace: shared-data
   - name: update-dev-manifest
     params:
     - name: image
@@ -152,7 +132,7 @@ spec:
     runAfter:
 #    - acs-image-check
 #    - acs-image-scan
-    - generate-sbom
+    - build-sign-image
     taskRef:
       kind: Task
       name: update-manifest
