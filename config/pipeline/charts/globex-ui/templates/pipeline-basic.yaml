@@ -53,7 +53,7 @@ spec:
       workspace: shared-data
   - name: list-directory
     runAfter:
-     - fetch-source
+    - fetch-source
     workspaces:
     - name: directory
       workspace: shared-data
@@ -67,7 +67,7 @@ spec:
     - name: PROXY_PROTOCOL
       value: http
     runAfter:
-      - list-directory
+    - list-directory
     taskRef:
       kind: ClusterTask
       name: maven
