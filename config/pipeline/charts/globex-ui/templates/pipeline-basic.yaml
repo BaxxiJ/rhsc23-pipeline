@@ -52,6 +52,9 @@ spec:
     - name: output
       workspace: shared-data
   - name: list-directory
+    taskRef:
+      kind: Task
+      name: list-directory
     runAfter:
     - fetch-source
     workspaces:
