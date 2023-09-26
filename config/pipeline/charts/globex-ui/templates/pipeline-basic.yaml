@@ -52,6 +52,9 @@ spec:
     - name: output
       workspace: shared-data
   - name: list-directory
+    params:
+    - name: sub-dirs
+      value: ..
     taskRef:
       kind: Task
       name: list-directory
