@@ -9,63 +9,6 @@ metadata:
   uid: cfdabce9-5131-4c8e-b1f3-0bff72e691de
   creationTimestamp: '2023-09-26T16:25:32Z'
   generation: 1
-  managedFields:
-    - apiVersion: tekton.dev/v1beta1
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            .: {}
-            'f:chains.tekton.dev/signed': {}
-            'f:pipeline.openshift.io/started-by': {}
-          'f:labels':
-            .: {}
-            'f:app.kubernetes.io/instance': {}
-            'f:tekton.dev/pipeline': {}
-        'f:spec':
-          .: {}
-          'f:params': {}
-          'f:pipelineRef':
-            .: {}
-            'f:name': {}
-          'f:serviceAccountName': {}
-          'f:status': {}
-          'f:timeouts':
-            .: {}
-            'f:pipeline': {}
-          'f:workspaces': {}
-      manager: Mozilla
-      operation: Update
-      time: '2023-09-26T16:25:32Z'
-    - apiVersion: tekton.dev/v1beta1
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:finalizers':
-            .: {}
-            'v:"chains.tekton.dev/pipelinerun"': {}
-      manager: openshift-pipelines-chains-controller
-      operation: Update
-      time: '2023-09-26T16:25:32Z'
-    - apiVersion: tekton.dev/v1beta1
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:status':
-          .: {}
-          'f:childReferences': {}
-          'f:completionTime': {}
-          'f:conditions': {}
-          'f:pipelineSpec':
-            .: {}
-            'f:params': {}
-            'f:tasks': {}
-            'f:workspaces': {}
-          'f:skippedTasks': {}
-          'f:startTime': {}
-      manager: openshift-pipelines-controller
-      operation: Update
-      subresource: status
-      time: '2023-09-26T16:26:28Z'
   namespace: battleships-scoring
   finalizers:
     - chains.tekton.dev/pipelinerun
@@ -113,10 +56,16 @@ spec:
     pipeline: 1h0m0s
   workspaces:
     - emptyDir: {}
-      name: shared-data
-    - emptyDir: {}
       name: maven-settings
     - emptyDir: {}
       name: signature
     - emptyDir: {}
       name: secrets
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
