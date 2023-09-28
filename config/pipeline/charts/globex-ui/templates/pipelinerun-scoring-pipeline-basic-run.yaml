@@ -1,17 +1,8 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  annotations:
-    chains.tekton.dev/signed: 'true'
-    pipeline.openshift.io/started-by: 'kube:admin'
-  resourceVersion: '45621926'
-  name: scoring-pipeline-basic-cezw85
-  uid: cfdabce9-5131-4c8e-b1f3-0bff72e691de
-  creationTimestamp: '2023-09-26T16:25:32Z'
-  generation: 1
+  name: scoring-pipeline-basic-run
   namespace: battleships-scoring
-  finalizers:
-    - chains.tekton.dev/pipelinerun
   labels:
     app.kubernetes.io/instance: scoring-pipeline
     tekton.dev/pipeline: scoring-pipeline-basic
@@ -22,9 +13,9 @@ spec:
     - name: COMMIT_AUTHOR
       value: jbaxter0
     - name: COMMIT_DATE
-      value: '''2023-09-26T06:00:57Z’'
+      value: '2023-09-26T06:00:57Z'
     - name: COMMIT_MESSAGE
-      value: '''commit message'''
+      value: 'commit message'
     - name: COMMIT_SHA
       value: 352340f
     - name: DOCKERFILE
@@ -56,16 +47,10 @@ spec:
     pipeline: 1h0m0s
   workspaces:
     - emptyDir: {}
+      name: shared-data
+    - emptyDir: {}
       name: maven-settings
     - emptyDir: {}
       name: signature
     - emptyDir: {}
       name: secrets
-    - name: shared-data
-      volumeClaimTemplate:
-        spec:
-          accessModes:
-          - ReadWriteOnce
-          resources:
-            requests:
-              storage: 1Gi
