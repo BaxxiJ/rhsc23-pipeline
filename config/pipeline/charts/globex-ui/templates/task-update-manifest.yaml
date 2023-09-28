@@ -40,7 +40,6 @@ spec:
 
       cd $TMPDIR
       git clone $(params.repository)
-      cd rhsc23-pipeline
       git checkout $(params.target-branch)
 
       # Set to the short commit value passed as parameter.
