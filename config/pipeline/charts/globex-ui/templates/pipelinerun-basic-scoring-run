@@ -1,0 +1,122 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  annotations:
+    chains.tekton.dev/signed: 'true'
+    pipeline.openshift.io/started-by: 'kube:admin'
+  resourceVersion: '45621926'
+  name: scoring-pipeline-basic-cezw85
+  uid: cfdabce9-5131-4c8e-b1f3-0bff72e691de
+  creationTimestamp: '2023-09-26T16:25:32Z'
+  generation: 1
+  managedFields:
+    - apiVersion: tekton.dev/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:chains.tekton.dev/signed': {}
+            'f:pipeline.openshift.io/started-by': {}
+          'f:labels':
+            .: {}
+            'f:app.kubernetes.io/instance': {}
+            'f:tekton.dev/pipeline': {}
+        'f:spec':
+          .: {}
+          'f:params': {}
+          'f:pipelineRef':
+            .: {}
+            'f:name': {}
+          'f:serviceAccountName': {}
+          'f:status': {}
+          'f:timeouts':
+            .: {}
+            'f:pipeline': {}
+          'f:workspaces': {}
+      manager: Mozilla
+      operation: Update
+      time: '2023-09-26T16:25:32Z'
+    - apiVersion: tekton.dev/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:finalizers':
+            .: {}
+            'v:"chains.tekton.dev/pipelinerun"': {}
+      manager: openshift-pipelines-chains-controller
+      operation: Update
+      time: '2023-09-26T16:25:32Z'
+    - apiVersion: tekton.dev/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          .: {}
+          'f:childReferences': {}
+          'f:completionTime': {}
+          'f:conditions': {}
+          'f:pipelineSpec':
+            .: {}
+            'f:params': {}
+            'f:tasks': {}
+            'f:workspaces': {}
+          'f:skippedTasks': {}
+          'f:startTime': {}
+      manager: openshift-pipelines-controller
+      operation: Update
+      subresource: status
+      time: '2023-09-26T16:26:28Z'
+  namespace: battleships-scoring
+  finalizers:
+    - chains.tekton.dev/pipelinerun
+  labels:
+    app.kubernetes.io/instance: scoring-pipeline
+    tekton.dev/pipeline: scoring-pipeline-basic
+spec:
+  params:
+    - name: BUILD_EXTRA_ARGS
+      value: $(tt.params.build_extra_args)
+    - name: COMMIT_AUTHOR
+      value: jbaxter0
+    - name: COMMIT_DATE
+      value: '''2023-09-26T06:00:57Z’'
+    - name: COMMIT_MESSAGE
+      value: '''commit message'''
+    - name: COMMIT_SHA
+      value: 352340f
+    - name: DOCKERFILE
+      value: 2021-scoring-service/src/main/docker/Dockerfile2023.jvm
+    - name: GIT_REF
+      value: main
+    - name: GIT_REPO
+      value: 'https://github.com/rhsc-2023-uki/2021-scoring-service.git'
+    - name: IMAGE_REPO
+      value: quay.io/jbaxter0/rhsc23-scoring
+    - name: IMAGE_TAG
+      value: latest
+    - name: MANIFEST_FILE
+      value: gitops/application/globex/overlays/dev/kustomization.yaml
+    - name: MANIFEST_FILE_PROD
+      value: gitops/application/globex/overlays/prod/kustomization.yaml
+    - name: MANIFEST_REPO
+      value: 'https://github.com/BaxxiJ/rhsc23-pipeline.git'
+    - name: MANIFEST_REPO_NAME
+      value: BaxxiJ/rhsc23-pipeline.git
+    - name: REPO_HOST
+      value: github.com
+    - name: TLSVERIFY
+      value: 'false'
+  pipelineRef:
+    name: scoring-pipeline-basic
+  serviceAccountName: pipeline
+  timeouts:
+    pipeline: 1h0m0s
+  workspaces:
+    - emptyDir: {}
+      name: shared-data
+    - emptyDir: {}
+      name: maven-settings
+    - emptyDir: {}
+      name: signature
+    - emptyDir: {}
+      name: secrets
