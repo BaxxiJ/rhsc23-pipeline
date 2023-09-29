@@ -29,6 +29,12 @@ spec:
     type: string
   steps:
   - image: alpine/git:latest
+    env:
+    - name: GITHOSTACCESSTOKEN
+      valueFrom:
+        secretKeyRef:
+          key: “token”
+          name: “git-token”
     name: git
     script: |
       # Setting up the git config.
@@ -45,6 +51,7 @@ spec:
       git remote update
       echo $(params.repository)
       git clone $(params.repository)
+      echo ${GITHOSTACCESSTOKEN}
       ls -la
       cd rhsc23-pipeline
       git checkout $(params.target-branch)
@@ -57,7 +64,7 @@ spec:
 
       git add $(params.configuration_file)
       git commit -m "Automatically updated manifest to point to image tag $IMAGE"
-      git push origin $(params.target-branch)
+      git push origin ${GITHOSTACCESSTOKEN}@$(params.target-branch)
 
       # flow of code: login to git > make new git branch > clone repo > set IMAGE var > replace image with new image tag > git commit & push
       # TODO, fix git login, replace git repo w/ demo-cluster-setup, replace sed with kustomize
