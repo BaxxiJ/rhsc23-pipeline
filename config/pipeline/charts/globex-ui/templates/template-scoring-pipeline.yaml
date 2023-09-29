@@ -39,10 +39,10 @@ spec:
     name: build_extra_args
   - description: Target image repository name
     name: imageRepo
-  # - description: Sonarqube host url
-  #   name: sonarqubeHostUrl
-  # - description: Cyclonedx host url
-  #   name: cyclonedxHostUrl
+  - description: Sonarqube host url
+    name: sonarqubeHostUrl
+  - description: Cyclonedx host url
+    name: cyclonedxHostUrl
   resourcetemplates:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
