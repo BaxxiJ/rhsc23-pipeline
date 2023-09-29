@@ -94,7 +94,7 @@ spec:
         --label=io.openshift.build.commit.id='$(params.COMMIT_SHA)' --label=io.openshift.build.commit.message='$(params.COMMIT_MESSAGE)'
         --label=io.openshift.build.commit.ref='$(params.GIT_REF)' --ulimit=nofile=4096:4096
     - name: IMAGE
-      value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
+      value: $(params.IMAGE_REPO):$(params.COMMIT_SHA)
     runAfter:
     - maven-package
     taskRef:
