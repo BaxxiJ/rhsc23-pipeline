@@ -13,14 +13,14 @@ spec:
   - bindings:
     - ref: app-scoring-binding
     - ref: github-push-binding
-    # interceptors:
+    interceptors:
     # - params:
-      # - name: secretRef
-      #   value:
-      #     secretKey: webhook-secret-key
-      #     secretName: webhook-secret-scoring
-      # ref:
-      #   name: github
+    #   - name: secretRef
+    #     value:
+    #       secretKey: webhook-secret-key
+    #       secretName: webhook-secret-scoring
+    #   ref:
+    #     name: github
     - params:
       - name: filter
         value: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
