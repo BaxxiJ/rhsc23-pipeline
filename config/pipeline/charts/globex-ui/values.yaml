@@ -2,7 +2,7 @@
 
 globex:
   registry:
-    imageRepo: ""
+    imageRepo: "quay.io/jbaxter0/rhsc23-scoring"
     dockerConfigJson: ""
   gitea:
   #   manifestRepo: ""
