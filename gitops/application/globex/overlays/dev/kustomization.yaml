@@ -7,4 +7,4 @@ patches:
   patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
-      value: image-registry.openshift-image-registry.svc:5000/coolstore/globex-ui
+      value:  "quay.io/jbaxter0/rhsc23-scoring:latest"
