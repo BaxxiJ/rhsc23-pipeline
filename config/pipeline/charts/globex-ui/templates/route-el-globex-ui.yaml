@@ -5,7 +5,7 @@ metadata:
 spec:
   to:
     kind: Service
-    name: el-app-globex-ui-event-listener
+    name: el-app-scoring-event-listener
     weight: 100
   port:
     targetPort: http-listener
