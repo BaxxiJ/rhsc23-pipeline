@@ -39,6 +39,7 @@ spec:
       TMPDIR=$(mktemp -d)
 
       cd $TMPDIR
+      git init
       git clone $(params.repository)
       git checkout $(params.target-branch)
 
