@@ -51,3 +51,6 @@ spec:
       git add $(params.configuration_file)
       git commit -m "Automatically updated manifest to point to image tag $IMAGE"
       git push origin $(params.target-branch)
+
+      # flow of code: login to git > make new git branch > clone repo > set IMAGE var > replace image with new image tag > git commit & push
+      # TODO, fix git login, replace git repo w/ demo-cluster-setup, replace sed with kustomize
