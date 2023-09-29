@@ -41,6 +41,8 @@ spec:
       cd $TMPDIR
       git init
       git fetch
+      git remote update
+      echo $(params.repository)
       git clone $(params.repository)
       git checkout $(params.target-branch)
 
