@@ -20,7 +20,7 @@ globex:
     manifestRepoName: ""
     gitRepoHost: ""
     manifestFileFail: ""
-    webhookSecretKey: ""
+    # webhookSecretKey: ""
     token: ""
   sonarqube:
     hostUrl: ""
