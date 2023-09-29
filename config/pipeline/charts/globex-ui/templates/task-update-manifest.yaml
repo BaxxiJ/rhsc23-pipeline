@@ -33,8 +33,8 @@ spec:
     - name: GITHOSTACCESSTOKEN
       valueFrom:
         secretKeyRef:
-          key: “token”
-          name: “git-token”
+          key: token
+          name: git-token
     name: git
     script: |
       # Setting up the git config.
