@@ -44,6 +44,7 @@ spec:
       git remote update
       echo $(params.repository)
       git clone $(params.repository)
+      ls -la
       git checkout $(params.target-branch)
 
       # Set to the short commit value passed as parameter.
