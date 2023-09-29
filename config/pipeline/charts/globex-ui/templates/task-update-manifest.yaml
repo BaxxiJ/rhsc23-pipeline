@@ -40,6 +40,7 @@ spec:
 
       cd $TMPDIR
       git init
+      git ls-remote --heads origin
       git fetch
       git remote update
       echo $(params.repository)

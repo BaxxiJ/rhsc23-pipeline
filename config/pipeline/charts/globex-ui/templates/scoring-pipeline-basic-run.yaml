@@ -33,7 +33,7 @@ spec:
     - name: MANIFEST_FILE_PROD
       value: gitops/application/globex/overlays/prod/kustomization.yaml
     - name: MANIFEST_REPO
-      value: 'https://github.com/BaxxiJ/rhsc23-pipeline.git'
+      value: 'https://github.com/BaxxiJ/rhsc23-pipeline'
     - name: MANIFEST_REPO_NAME
       value: BaxxiJ/rhsc23-pipeline.git
     - name: REPO_HOST
