@@ -4,15 +4,15 @@ globex:
   registry:
     imageRepo: ""
     dockerConfigJson: ""
-  gitea:
-    manifestRepo: ""
-    manifestFile: ""
-    manifestFileProd: ""
-    manifestRepoName: ""
-    gitRepoHost: ""
-    manifestFileFail: ""
-    webhookSecretKey: ""
-    token: ""
+  # gitea:
+  #   manifestRepo: ""
+  #   manifestFile: ""
+  #   manifestFileProd: ""
+  #   manifestRepoName: ""
+  #   gitRepoHost: ""
+  #   manifestFileFail: ""
+  #   webhookSecretKey: ""
+  #   token: ""
   git:
     manifestRepo: ""
     manifestFile: ""

@@ -54,6 +54,8 @@ spec:
         value: $(tt.params.gitRepoHost)
       - name: GIT_REPO
         value: $(tt.params.gitrepositoryurl)
+      - name: DOCKERFILE
+        value: src/main/docker/Dockerfile2023.jvm
       - name: TLSVERIFY
         value: $(tt.params.tlsVerify)
       - name: BUILD_EXTRA_ARGS
