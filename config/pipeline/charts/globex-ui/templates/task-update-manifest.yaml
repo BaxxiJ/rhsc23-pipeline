@@ -46,6 +46,7 @@ spec:
       echo $(params.repository)
       git clone $(params.repository)
       ls -la
+      cd rhsc23-pipeline
       git checkout $(params.target-branch)
 
       # Set to the short commit value passed as parameter.
