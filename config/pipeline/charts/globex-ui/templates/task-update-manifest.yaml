@@ -50,7 +50,7 @@ spec:
       git fetch
       git remote update
       echo $(params.repository)
-      git clone https://${GITHOSTACCESSTOKEN}@github.com/$(params.git_user_name)/rhsc23-pipeline.git
+      git clone https://${GITHOSTACCESSTOKEN}@github.com/BaxxiJ/rhsc23-pipeline.git
       echo ${GITHOSTACCESSTOKEN}
       ls -la
       cd rhsc23-pipeline
