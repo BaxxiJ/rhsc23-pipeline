@@ -34,11 +34,13 @@ spec:
       # Setting up the git config.
       git config --global user.email "$(params.git_user_email)"
       git config --global user.name "$(params.git_user_name)"
+      git config --global init.defaultBranch main
 
       # Checkout target branch to avoid the detached HEAD state
       TMPDIR=$(mktemp -d)
 
       cd $TMPDIR
+      git init
       git fetch
       git remote update
       echo $(params.repository)
