@@ -13,6 +13,15 @@ globex:
     manifestFileFail: ""
     webhookSecretKey: ""
     token: ""
+  git:
+    manifestRepo: ""
+    manifestFile: ""
+    manifestFileProd: ""
+    manifestRepoName: ""
+    gitRepoHost: ""
+    manifestFileFail: ""
+    webhookSecretKey: ""
+    token: ""
   sonarqube:
     hostUrl: ""
   cosign:
