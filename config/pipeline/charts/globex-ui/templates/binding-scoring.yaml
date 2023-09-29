@@ -8,17 +8,17 @@ spec:
   - name: imageRepo
     value: "{{ $.Values.globex.registry.imageRepo }}"
   - name: manifestRepo
-    value: "{{ $.Values.globex.gitea.manifestRepo }}"
+    value: "{{ $.Values.globex.git.manifestRepo }}"
   - name: manifestFile
-    value: "{{ $.Values.globex.gitea.manifestFile }}"
+    value: "{{ $.Values.globex.git.manifestFile }}"
   - name: manifestFileProd
-    value: "{{ $.Values.globex.gitea.manifestFileProd }}"
+    value: "{{ $.Values.globex.git.manifestFileProd }}"
   - name: manifestRepoName
-    value: "{{ $.Values.globex.gitea.manifestRepoName }}"
+    value: "{{ $.Values.globex.git.manifestRepoName }}"
   - name: tlsVerify
     value: "true"
   - name: gitRepoHost
-    value: "{{ $.Values.globex.gitea.gitRepoHost }}"
+    value: "{{ $.Values.globex.git.gitRepoHost }}"
   - name: sonarqubeHostUrl
     value: "{{ $.Values.globex.sonarqube.hostUrl }}"
   - name: cyclonedxHostUrl
