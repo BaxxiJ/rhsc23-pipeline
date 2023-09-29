@@ -7,4 +7,4 @@ patches:
   patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
-      value:   "quay.io/jbaxter0/rhsc23-scoring:main-90a8adb89bcf18874c4176be9960f14a85a3292b"
+      value:    "quay.io/jbaxter0/rhsc23-scoring:main-1e5a300684ae9a2660614876b85b11b60b75f630"
