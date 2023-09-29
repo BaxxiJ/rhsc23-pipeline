@@ -4,7 +4,7 @@ globex:
   registry:
     imageRepo: ""
     dockerConfigJson: ""
-  # gitea:
+  gitea:
   #   manifestRepo: ""
   #   manifestFile: ""
   #   manifestFileProd: ""
