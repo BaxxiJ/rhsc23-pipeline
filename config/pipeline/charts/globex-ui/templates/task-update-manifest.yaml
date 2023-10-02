@@ -28,7 +28,7 @@ spec:
     name: repository
     type: string
   steps:
-  - image: line/kubectl-kustomize:1.28.2-5.1.1
+  - image: alpine/git:latest
     env:
     - name: GITHOSTACCESSTOKEN
       valueFrom:
