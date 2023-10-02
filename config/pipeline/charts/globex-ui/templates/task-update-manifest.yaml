@@ -28,7 +28,7 @@ spec:
     name: repository
     type: string
   steps:
-  - image: alpine/git:latest
+  - image: registry.k8s.io/kustomize/kustomize:v5.0.0
     env:
     - name: GITHOSTACCESSTOKEN
       valueFrom:
