@@ -28,7 +28,7 @@ spec:
     name: repository
     type: string
   steps:
-  - image: alpine/git:latest
+  - image: image-registry.openshift-image-registry.svc:5000/myapp-ci/kustomize:latest
     env:
     - name: GITHOSTACCESSTOKEN
       valueFrom:
@@ -51,6 +51,8 @@ spec:
       git remote update
       echo $(params.repository)
       git clone https://${GITHOSTACCESSTOKEN}@github.com/BaxxiJ/rhsc23-pipeline.git
+      #TODO change cloned repo to demo-setup
+
       echo ${GITHOSTACCESSTOKEN}
       ls -la
       cd rhsc23-pipeline
@@ -61,6 +63,7 @@ spec:
       IMAGE=\"$(params.image)\"
 
       sed -i "s#\(.*value:\s*\).*#\1 ${IMAGE}#" $(params.configuration_file)
+      ##TODO replace with "kustomize edit set image example/hello:1=example/hello:latest"
 
       git add $(params.configuration_file)
       git commit -m "Automatically updated manifest to point to image tag $IMAGE"
