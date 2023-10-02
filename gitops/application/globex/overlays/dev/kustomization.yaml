@@ -1,9 +1,13 @@
 bases:
 - ../../base
+images:
+ - name: battleship-scoring
+   newName: quay.io/jbaxter0/rhsc23-scoring
+   newTag: main-f823bdc4d64fd066a54e075715486688f3b02b66
 patches:
 - target:
-    kind: Deployment
-    name: globex-ui
+    kind: DeploymentConfig
+    name: scoring-service
   patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image

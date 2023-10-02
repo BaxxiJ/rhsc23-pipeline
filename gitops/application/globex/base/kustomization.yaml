@@ -33,3 +33,11 @@ resources:
 - svc-inventory.yaml
 - svc-order-placement.yaml
 - svc-recommendation-engine.yaml
+- scoring-deploymentconfig.yaml
+- scoring-route-secure.yaml
+
+
+# images:
+#  - name: quay.io/uksummit2023/2023-scoring-service
+#    newName: my-private.docker.registry/alpine
+#    newTag: latest
