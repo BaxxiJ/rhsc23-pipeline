@@ -55,7 +55,7 @@ spec:
 
       echo ${GITHOSTACCESSTOKEN}
       ls -la
-      cd rhsc23-pipeline
+      cd rhsc23-pipeline/gitops/application/globex/overlays/dev
       git checkout $(params.target-branch)
 
       # Set to the short commit value passed as parameter.
