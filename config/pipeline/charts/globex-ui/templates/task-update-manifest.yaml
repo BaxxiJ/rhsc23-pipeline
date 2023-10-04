@@ -27,6 +27,10 @@ spec:
   - description: Repo in which the image configuration is stored.
     name: repository
     type: string
+  - name: manifest_repo_name
+    type: string
+  - name: git_repo_host
+    type: string
   steps:
   - image: registry.k8s.io/kustomize/kustomize:v5.0.0
     env:
@@ -50,30 +54,24 @@ spec:
       git fetch
       git remote update
       echo $(params.repository)
-      git clone https://${GITHOSTACCESSTOKEN}@github.com/BaxxiJ/rhsc23-pipeline.git
+      git clone https://${GITHOSTACCESSTOKEN}@$(params.git_repo_host)/$(params.manifest_repo_name)
       #TODO change cloned repo to demo-setup
 
       echo ${GITHOSTACCESSTOKEN}
       ls -la
-      cd rhsc23-pipeline/gitops/application/globex/overlays/dev
+      cd 2021-demo-cluster-setup 
+      #TODO remove hard-code
       git checkout $(params.target-branch)
 
       # Set to the short commit value passed as parameter.
       # Notice the enclosing " to keep it as a string in the resulting YAML.
-      IMAGE=\"$(params.image)\"
+      #IMAGE=\"$(params.image)\"
 
-      # sed -i "s#\(.*value:\s*\).*#\1 ${IMAGE}#" $(params.configuration_file)
+      #sed -i "s#\(.*value:\s*\).*#\1 ${IMAGE}#" $(params.configuration_file)
 
-      echo "$(params.image)"
+      kustomize edit set image quay.io/uksummit2023/2023-scoring-service=$(params.image)
 
-      kustomize edit set image $(params.image)
-
-      cat kustomization.yaml
-
-      kustomize build .
-      ##TODO replace with "kustomize edit set image example/hello:1=example/hello:latest"
-
-      git add .
+      git add $(params.configuration_file)
       git commit -m "Automatically updated manifest to point to image tag $IMAGE"
       git push origin main
 

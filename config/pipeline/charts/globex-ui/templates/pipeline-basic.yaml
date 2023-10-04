@@ -143,6 +143,10 @@ spec:
       value: $(params.MANIFEST_REPO)
     - name: git_user_name
       value: $(params.COMMIT_AUTHOR)
+    - name: manifest_repo_name
+      value: $(params.MANIFEST_REPO_NAME)
+    - name: git_repo_host
+      value: $(params.REPO_HOST)
     runAfter:
 #    - acs-image-check
 #    - acs-image-scan

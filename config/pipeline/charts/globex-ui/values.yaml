@@ -14,10 +14,10 @@ globex:
     webhookSecretKey: ""
   #   token: ""
   git:
-    manifestRepo: "https://github.com/BaxxiJ/rhsc23-pipeline.git"
-    manifestFile: "gitops/application/globex/overlays/dev/kustomization.yaml"
+    manifestRepo: "https://github.com/rhsc-2023-uki/2021-demo-cluster-setup.git"
+    manifestFile: "deployment/backend/scoring/kustomization.yaml"
     manifestFileProd: ""
-    manifestRepoName: "BaxxiJ/rhsc23-pipeline.git"
+    manifestRepoName: "rhsc-2023-uki/2021-demo-cluster-setup.git"
     gitRepoHost: "github.com"
     manifestFileFail: ""
     webhookSecretKey: ""
