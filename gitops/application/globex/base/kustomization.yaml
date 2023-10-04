@@ -18,7 +18,7 @@ resources:
 - sa-globex-app-recommendation-engine.yaml
 - sa-inventory-app.yaml
 - sa-order-placement.yaml
-- secret-image-registry.yaml
+# - secret-image-registry.yaml
 - secret-activity-tracking.yaml
 - secret-catalog-database.yaml
 - secret-inventory-database.yaml
