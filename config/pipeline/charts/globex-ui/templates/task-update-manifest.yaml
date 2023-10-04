@@ -62,9 +62,13 @@ spec:
       # Notice the enclosing " to keep it as a string in the resulting YAML.
       IMAGE=\"$(params.image)\"
 
-      sed -i "s#\(.*value:\s*\).*#\1 ${IMAGE}#" $(params.configuration_file)
+      # sed -i "s#\(.*value:\s*\).*#\1 ${IMAGE}#" $(params.configuration_file)
 
-      kustomize edit set quay.io/uksummit2023/2023-scoring-service=$(params.image)
+      kustomize edit set image quay.io/uksummit2023/2023-scoring-service=$(params.image)
+
+      cat kustomization.yaml
+
+      kustomize build .
       ##TODO replace with "kustomize edit set image example/hello:1=example/hello:latest"
 
       git add $(params.configuration_file)
