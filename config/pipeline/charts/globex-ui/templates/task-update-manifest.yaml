@@ -59,8 +59,12 @@ spec:
 
       echo ${GITHOSTACCESSTOKEN}
       ls -la
-      cd 2021-demo-cluster-setup 
-      #TODO remove hard-code
+      cd 2021-demo-cluster-setup
+      ls -la
+
+      cd deployment/backend/scoring
+      ls -la
+      
       git checkout $(params.target-branch)
 
       # Set to the short commit value passed as parameter.
@@ -69,8 +73,11 @@ spec:
 
       #sed -i "s#\(.*value:\s*\).*#\1 ${IMAGE}#" $(params.configuration_file)
 
-      kustomize edit set image quay.io/uksummit2023/2023-scoring-service=$(params.image)
+      
 
+      kustomize edit set image quay.io/uksummit2023/2023-scoring-service=$(params.image)
+      
+      cat kustomization.yaml
       kustomize build .
 
       git add $(params.configuration_file)
