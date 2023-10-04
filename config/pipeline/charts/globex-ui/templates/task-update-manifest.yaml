@@ -71,6 +71,8 @@ spec:
 
       kustomize edit set image quay.io/uksummit2023/2023-scoring-service=$(params.image)
 
+      kustomize build .
+
       git add $(params.configuration_file)
       git commit -m "Automatically updated manifest to point to image tag $IMAGE"
       git push origin main
