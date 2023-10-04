@@ -136,7 +136,7 @@ spec:
   - name: update-dev-manifest
     params:
     - name: image
-      value: $(params.IMAGE_REPO):$(params.IMAGE_TAG)
+      value: $(params.IMAGE_REPO):$(params.COMMIT_SHA)
     - name: configuration_file
       value: $(params.MANIFEST_FILE)
     - name: repository
