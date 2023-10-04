@@ -73,7 +73,7 @@ spec:
       kustomize build .
       ##TODO replace with "kustomize edit set image example/hello:1=example/hello:latest"
 
-      git add $(params.configuration_file)
+      git add .
       git commit -m "Automatically updated manifest to point to image tag $IMAGE"
       git push origin main
 
