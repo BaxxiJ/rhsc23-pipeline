@@ -8,14 +8,3 @@ The pipelines and definitions are applied to the cluster via argoCD,
 In order to deploy the pipeline you must define a custom parameter of your dockercfgjson, your gitaccesstoken, and your private key for cosign
 
 Current working pipeline is the new file pipeline-basic.yaml
-
-# Enable Image Signing
-To enable image signing patch the cluster with the follwoing commands 
-
-`
-oc patch configmap chains-config -n openshift-pipelines -p='{"data":{"artifacts.taskrun.format": "in-toto"}}'
-
-oc patch configmap chains-config -n openshift-pipelines -p='{"data":{"artifacts.taskrun.storage": "oci"}}'
-
-oc patch configmap chains-config -n openshift-pipelines -p='{"data":{"transparency.enabled": "true"}}'
-`
