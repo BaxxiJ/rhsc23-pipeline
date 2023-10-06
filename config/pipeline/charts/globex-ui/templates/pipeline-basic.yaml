@@ -36,6 +36,12 @@ spec:
     type: string
   - name: GIT_REPO
     type: string
+  - name: COSIGN_PRIVATE_KEY
+    type: string
+  - name: COSIGN_PASSWORD
+    type: string
+  - name: COSIGN_PUBLIC_KEY
+    type: string
   tasks:
   - name: fetch-source
     params:
@@ -148,12 +154,31 @@ spec:
     - name: git_repo_host
       value: $(params.REPO_HOST)
     runAfter:
-#    - acs-image-check
-#    - acs-image-scan
     - build-sign-image
     taskRef:
       kind: Task
       name: update-manifest
+
+  - name: sign-image
+    params:
+    - name: image
+      value: $(params.IMAGE_REPO):$(params.COMMIT_SHA)
+    - name: cosignPrivateKey
+      value: $(params.COSIGN_PRIVATE_KEY)
+    - name: cosignPassword
+      value: $(params.COSIGN_PASSWORD)
+    - name: cosignPrivateKey
+      value: $(params.COSIGN_PUBLIC_KEY)
+    - name: registrySecret
+      value: image-registry-secret
+    runAfter:
+    - build-sign-image
+    taskRef:
+      kind: Task
+      name: cosign-sign
+    workspaces:
+    - name: signature
+      workspace: signature
 #  - name: acs-deploy-check
 #    params:
 #      - name: rox_central_endpoint

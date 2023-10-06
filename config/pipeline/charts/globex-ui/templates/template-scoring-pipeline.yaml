@@ -82,6 +82,12 @@ spec:
         value: $(tt.params.io.openshift.build.commit.author)
       - name: COMMIT_MESSAGE
         value: $(tt.params.io.openshift.build.commit.message)
+      - name: COSIGN_PRIVATE_KEY
+        value: $(tt.params.cosignPrivateKey
+      - name: COSIGN_PASSWORD
+        value: $(tt.params.cosignPassword)
+      - name: COSIGN_PUBLIC_KEY
+        value: $(tt.params.cosignPublicKey))
       - name: SONARQUBE_HOST_URL
         value: $(tt.params.sonarqubeHostUrl)
       - name: SONARQUBE_PROJECT_KEY

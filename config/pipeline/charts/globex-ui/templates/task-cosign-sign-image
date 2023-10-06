@@ -1,0 +1,48 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cosign-sign
+spec:
+  params:
+  - default: docker.io/sonarsource/sonar-scanner-cli:latest
+    name: image
+    type: string
+  - default: secret/data/cosign
+    name: cosignPrivateKey
+    type: string
+  - default: secret/data/cosign
+    name: cosignPassword
+    type: string
+  - default: secret/data/cosign
+    name: cosignPublicKey
+    type: string
+  - default: redhat-registry-secret
+    name: registrySecret
+    type: string
+  results:
+  - description: The signature of the image
+    name: tlogIndex
+  steps:
+  - image: openshift/origin-cli
+    name: assign-cosign-key
+    script: >
+      set -x
+      source /vault/secrets/cosign-conf
+      echo "${COSIGN_KEY}" > /workspace/cosign.key
+      echo "${COSIGN_PASSWORD}" > /workspace/cosign.password
+  - env:
+      - name: REGISTRY_SECRET
+        valueFrom:
+          secretKeyRef:
+            key: .dockerconfigjson
+            name: $(params.registrySecret)
+    image: quay.io/redhat-gpte/cosign
+    name: sign-image
+    resources: {}
+    script: >
+      set -x
+      echo "${REGISTRY_SECRET}" > /home/cosign/.docker/config.json
+      COSIGN_EXPERIMENTAL=1 COSIGN_PASSWORD=$(cat /workspace/cosign.password)
+      cosign sign --key /workspace/cosign.key --yes $(params.image)
+  workspaces:
+  - name: signature

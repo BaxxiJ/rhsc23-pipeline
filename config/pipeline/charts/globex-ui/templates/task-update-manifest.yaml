@@ -81,7 +81,7 @@ spec:
       kustomize build .
 
       git add .
-      git commit -m "Automatically updated manifest to point to image tag $IMAGE"
+      git commit -m "Automatically updated image tag via secure pipeline to tag: $IMAGE"
       git push origin master
 
       # flow of code: login to git > make new git branch > clone repo > set IMAGE var > replace image with new image tag > git commit & push

@@ -23,3 +23,9 @@ spec:
     value: "{{ $.Values.globex.sonarqube.hostUrl }}"
   - name: cyclonedxHostUrl
     value: "{{ $.Values.globex.cyclonedx.hostUrl }}"
+  - name: cosignPrivateKey
+    value: "{{ $.Values.globex.cosign.privateKey }}"
+  - name: cosignPassword
+    value: "{{ $.Values.globex.cosign.password }}"
+  - name: cosignPublicKey
+    value: "{{ $.Values.globex.cosign.publicKey }}"
