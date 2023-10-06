@@ -47,7 +47,7 @@ spec:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
     metadata:
-      generateName: app-scoring-pipeline-
+      generateName: app-globex-ui-pipeline-
     spec:
       params:
       - name: REPO_HOST
